@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown</title>
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+        *{
+            margin: 0px;
+        }
+
+        body{
+            background-image: url(./pexels-karolina-grabowska-5478011.jpg);
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .topnav{
+            float: right;
+            padding: 20px;
+            width: 150px;
+            background-color: rgba(0,255,255, 0.422);
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 26px 20px 0 rgba(0,0,0,0.19);
+        }
+
+        .topnav a{
+    display: none;
+            text-decoration: none;
+        }
+
+        .topnav a.icon{
+            display: block;
+        }
+
+        .line{
+            width: 7px;
+            height: 35px;
+            background: white;
+            margin: 0.5px;
+            border-radius: 2rem;
+            display: inline-block;
+        }
+
+        .topnav.responsive{
+            position: relative;
+            width: 150px;
+            z-index: +1;
+            height: 260px;
+            float: right;
+        }
+        .topnav.responsive a{
+            display: block;
+            color: white;
+            width: 100%;
+            font-size: 22px;
+            padding: 8px 0px;
+        }
+        .topnav.responsive .icon{
+            padding: 0px;  
+          font-size: initial;
+        
+        }
+
+        .topnav.responsive .icon:hover{
+          box-shadow: none;
+        }
+
+
+        .topnav.responsive .icon .line:nth-child(1){
+transform: rotate(-45deg) translate(0px, 10px);
+height: 21px;
+transition: ease-in-out 0.7s;
+        }
+        .topnav.responsive .icon .line:nth-child(3){
+            transform: rotate(45deg) translate(0px, 10px);
+height: 21px;  
+transition: ease-in-out 0.7s;
+        }
+
+        .topnav.responsive a:hover{
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 26px 20px 0 rgba(0,0,0,0.19);
+            font-weight: 900;
+animation: display 1s;
+transform: none;
+        }
+
+        @keyframes display{
+            0%{
+                transform: scale(1.2);
+            }
+            100%{
+                transform: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="topnav" id="myTopnav">
+            <center>
+            <a href="#" class="icon" onclick="DisplayMenu()">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </a>
+            
+            <a href="#">About</a>
+            <a href="#">Portfolio</a>
+            <a href="#">Gallery</a>
+            <a href="#">Customers</a>
+            <a href="#">Contact</a>
+        </center>
+        </div>
+    </header>
+<script>
+    function DisplayMenu() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        }
+        else{
+            x.className = "topnav"
+        }
+    }
+</script>
+</body>
+</html>

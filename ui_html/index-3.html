@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shift Side bar</title>
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap'); 
+
+*{
+            margin: 0px;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        :root{
+            --pink: rgb(249,141,159);
+        }
+        body{
+            font-family: 'Exo 2', sans-serif;
+        }
+
+    .content .menu{
+        background: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 180px;
+        height: 100%;
+        transition: 1s ease all;
+    }
+    .content .menu a{
+ display: inline-block;
+ width: 100%;
+ padding: 15px;
+ border-bottom: 1px solid rgb(225, 225, 225);
+ color: var(--pink);
+ font-size: 20px;
+    }
+    .content .menu a:hover{
+background: var(--pink);
+text-transform: uppercase;
+ color: white;
+ 
+    }
+    .content .box{
+        width: calc(100% -180px);
+        margin-left: 180px;
+        background: url(./pexels-max-vakhtbovych-6180675.jpg);
+        height: 680px;
+        transition: all 1s ease;
+    }
+
+    .content .box .icon-box{
+        height: 20px;
+        display: flex;
+        align-items: left;
+        padding: 10px;
+    }
+    .icon img{
+        height: 30px;
+    }
+    .icon img:hover{
+       cursor: pointer;
+    }
+
+    body.active .icon img{
+        transform: rotate(180deg);
+        transition: 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
+
+    body.active .content .menu{
+        padding-top: 200px;
+        left: -180px;
+    }
+
+    body.active .content .box{
+      margin-left: 0;
+      width: 100%;
+    }
+    </style>
+</head>
+<body>
+    <div class="content">
+<div class="box">
+<div class="icon-box">
+    <div class="icon">
+        <img src="./arrow.png" alt="">
+    </div>
+</div>
+</div>
+
+           <div class="menu">
+            <a href="#" class="active">Home</a>
+            <a href="#">About</a>
+            <a href="#">Portfolio</a>
+            <a href="#">Gallery</a>
+            <a href="#">Customers</a>
+            <a href="#">Contact</a>
+       
+    </div>
+</div>
+<script>
+var icon = document.querySelector(".icon");
+icon.addEventListener("click", function(){
+    document.querySelector("body").classList.toggle("active");
+})
+</script>
+</body>
+</html>

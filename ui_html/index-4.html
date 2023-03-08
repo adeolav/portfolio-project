@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side bar Icons</title>
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap'); 
+
+*{
+    box-sizing: border-box;
+            margin: 0px;
+        }
+
+        body{
+            font-family: 'Exo 2', sans-serif;
+        }
+.container{
+    background-image: url(./pexels-ezekixl-akinnewu-1006222.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 680px;
+}
+.topnav{
+    width: 5%;
+    height: 680px;
+    background-color: black;
+    display: inline-block;
+    padding: 150px 15px;
+    overflow: hidden;
+}
+.topnav:hover{
+    width: 18%;
+   overflow: visible;
+   transition: all 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+.box{
+    height: 40px;
+    margin-top: 20px;
+    width: 200px;
+    padding: 5px 0px;
+}
+.topnav .box:hover{
+  background: linear-gradient(rgba(64, 200, 224, 0.397), rgba(180, 78, 95, 0.548));
+  transform: scale(1.1);
+  transition: ease-in-out 0.3s;
+}
+p {
+font-size: 22px;
+float: left;
+color: white;
+text-decoration: none;
+padding: 0px 25px;
+text-align: justify;
+}
+
+a{
+    text-decoration: none;
+    width: 90px;
+}
+
+img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    float: left;
+    background: white;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="topnav">
+        <div class="box">
+            <a href="">
+                <img src="./home.png" alt="">
+                <p>Home</p>
+            </a>
+        </div>
+        <div class="box">
+            <a href="">
+                <img src="./about.png" alt="">
+                <p>About</p>
+            </a>
+        </div>
+        <div class="box">
+            <a href="">
+                <img src="./portfolio.png" alt="">
+                <p>Portfolio</p>
+            </a>
+        </div>
+        <div class="box">
+            <a href="">
+                <img src="./customers.png" alt="">
+                <p>Customers</p>
+            </a>
+        </div>
+        <div class="box">
+            <a href="">
+                <img src="./contact.png" alt="">
+                <p>Contact</p>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
