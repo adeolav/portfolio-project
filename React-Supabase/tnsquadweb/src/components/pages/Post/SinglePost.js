@@ -1,7 +1,36 @@
+/* eslint-disable jsx-a11y/alt-text */
 import Nav from "../../layouts/Nav";
 import Footer from "../../layouts/Footer";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "../../../supabaseClient";
 
 function SinglePost() {
+
+  let { id } = useParams();
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    const getBlog = async () => {
+      try {
+        let { data, error, status } = await supabase
+        .from("blog")
+        .select("*")
+        .eq("id", id);
+
+        if (error && status !== 406) {
+          console.log("error", error);
+          throw error;
+        }
+        setData(data[0]);
+      } catch (error) {
+        // eslint-disable-next-line no-lone-blocks
+        {console.log(error.message)}}
+    }
+
+    getBlog();
+  }, [id]);
+
   return (
     <>
       <Nav />
@@ -13,17 +42,15 @@ function SinglePost() {
           <div className="row gx-4 gx-lg-5 justify-content-center">
             <div className="col-md-10 col-lg-8 col-xl-7">
               <div className="post-heading">
-                <h1>
-                  Man must explore, and this is exploration at its greatest
+                <img
+                  style={{width: "-webkit-fill-available"}}
+                  src={data ? data.image : ""}
+                 />
+                <h1> {data ? data.title : ""}
                 </h1>
                 <h2 className="subheading">
-                  Problems look mighty small from 150 miles up
+                {data ? data.description : ""}
                 </h2>
-                <span className="meta">
-                  Posted by
-                  <a href="#!">Start Bootstrap</a>
-                  on August 24, 2022
-                </span>
               </div>
             </div>
           </div>
@@ -33,92 +60,7 @@ function SinglePost() {
         <div className="container px-4 px-lg-5">
           <div className="row gx-4 gx-lg-5 justify-content-center">
             <div className="col-md-10 col-lg-8 col-xl-7">
-              <p>
-                Never in all their history have men been able truly to conceive
-                of the world as one: a single sphere, a globe, having the
-                qualities of a globe, a round earth in which all the directions
-                eventually meet, in which there is no center because every
-                point, or none, is center — an equal earth which all men occupy
-                as equals. The airman's earth, if free men make it, will be
-                truly round: a globe in practice, not in theory.
-              </p>
-              <p>
-                Science cuts two ways, of course; its products can be used for
-                both good and evil. But there's no turning back from science.
-                The early warnings about technological dangers also come from
-                science.
-              </p>
-              <p>
-                What was most significant about the lunar voyage was not that
-                man set foot on the Moon but that they set eye on the earth.
-              </p>
-              <p>
-                A Chinese tale tells of some men sent to harm a young girl who,
-                upon seeing her beauty, become her protectors rather than her
-                violators. That's how I felt seeing the Earth for the first
-                time. I could not help but love and cherish her.
-              </p>
-              <p>
-                For those who have seen the Earth from space, and for the
-                hundreds and perhaps thousands more who will, the experience
-                most certainly changes your perspective. The things that we
-                share in our world are far more valuable than those which divide
-                us.
-              </p>
-              <h2 className="section-heading">The Final Frontier</h2>
-              <p>
-                There can be no thought of finishing for ‘aiming for the stars.’
-                Both figuratively and literally, it is a task to occupy the
-                generations. And no matter how much progress one makes, there is
-                always the thrill of just beginning.
-              </p>
-              <p>
-                There can be no thought of finishing for ‘aiming for the stars.’
-                Both figuratively and literally, it is a task to occupy the
-                generations. And no matter how much progress one makes, there is
-                always the thrill of just beginning.
-              </p>
-              <blockquote className="blockquote">
-                The dreams of yesterday are the hopes of today and the reality
-                of tomorrow. Science has not yet mastered prophecy. We predict
-                too much for the next year and yet far too little for the next
-                ten.
-              </blockquote>
-              <p>
-                Spaceflights cannot be stopped. This is not the work of any one
-                man or even a group of men. It is a historical process which
-                mankind is carrying out in accordance with the natural laws of
-                human development.
-              </p>
-              <h2 className="section-heading">Reaching for the Stars</h2>
-              <p>
-                As we got further and further away, it [the Earth] diminished in
-                size. Finally it shrank to the size of a marble, the most
-                beautiful you can imagine. That beautiful, warm, living object
-                looked so fragile, so delicate, that if you touched it with a
-                finger it would crumble and fall apart. Seeing this has to
-                change a man.
-              </p>
-
-              <p>
-                Space, the final frontier. These are the voyages of the Starship
-                Enterprise. Its five-year mission: to explore strange new
-                worlds, to seek out new life and new civilizations, to boldly go
-                where no man has gone before.
-              </p>
-              <p>
-                As I stand out here in the wonders of the unknown at Hadley, I
-                sort of realize there’s a fundamental truth to our nature, Man
-                must explore, and this is exploration at its greatest.
-              </p>
-              <p>
-                Placeholder text by
-                <a href="http://spaceipsum.com/">Space Ipsum</a>
-                &middot; Images by
-                <a href="https://www.flickr.com/photos/nasacommons/">
-                  NASA on The Commons
-                </a>
-              </p>
+            {data ? data.content : ""}
             </div>
           </div>
         </div>
