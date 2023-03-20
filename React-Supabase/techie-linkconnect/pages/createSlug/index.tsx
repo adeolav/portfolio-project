@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import ImageUploading, { ImageListType } from "react-images-uploading";
-import supabase from "./utils/supabaseClient";
+import { useRouter } from "next/router";
+import supabase from "../utils/supabaseClient";
 
 type Link = {
   title: string;
@@ -13,10 +13,9 @@ export default function Home() {
   const [title, setTitle] = useState<string | undefined>();
   const [url, setUrl] = useState<string | undefined>();
   const [links, setLinks] = useState<Link[]>();
-  const [images, setImages] = useState<ImageListType>([]);
-
-  const onChange = (imageList: ImageListType) => {setImages(imageList);
-  };
+  const router = useRouter();
+  const { creatorSlug } = router.query;
+  
 
   useEffect(() => {
     const getUser = async () => {
@@ -75,12 +74,18 @@ export default function Home() {
 
   return (
     <div className="flex flex-col w-full justify-center items-center mt-4">
+      {/* //profile_picture on top
+      {profilePictureUrl && <Image src={profilePictureUrl} alt="profile_picture"
+      height={100}
+      width={100}
+      className="rounded=full" />} */}
       {links?.map((link: Link, index: number) => (
         <div
           className="shadow-xl w-96 bg-indigo-500 mt-4 p-4 rounded-lg text-center text-white"
           key={index}
           onClick={(e) => {
             e.preventDefault();
+            window.location.href = link.url;
           }}
         >
           {link.title}
@@ -91,16 +96,16 @@ export default function Home() {
         <>
         <div>
           <h3>Adding link</h3>
-        <div className="mt-4">
-            <div className="block text-sm font-medium text-gray-700">Title</div>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="my awesome link"
-              onChange={(e) => setTitle(e.target.value)}
-            />
+          <div className="mt-4">
+              <div className="block text-sm font-medium text-gray-700">Title</div>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="my awesome link"
+                onChange={(e) => setTitle(e.target.value)}
+              />
           </div>
 
           <div className="mt-4">
@@ -123,8 +128,6 @@ export default function Home() {
             Add New Link
           </button>
         </div>
-          
-      </div>
         </>
       )}
     </div>

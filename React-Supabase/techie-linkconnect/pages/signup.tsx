@@ -5,6 +5,7 @@ import supabase from "./utils/supabaseClient";
 export default function SignUp() {
   const [email, setEmail] = useState<string | undefined>();
   const [password, setPassword] = useState<string | undefined>();
+  const [usename, setUsername] = useState<string | undefined>();
 
   async function signUpWithEmail() {
     try {
@@ -15,15 +16,45 @@ export default function SignUp() {
         });
         if (resp.error) throw resp.error;
         const userId = resp.data.user?.id;
-        console.log("userId: ", userId);
+        if (userId) {
+          await createUser(userId);
+          console.log("userId: ", userId);
+        }
+        
       }
     } catch (error) {
       console.log("error: ", error);
     }
   }
-
+  
+  async function createUser(userId: string) {
+    try {
+      const {error} = await supabase.from("users").insert({id: userId, username: username});
+      if (error) throw error;
+    } catch (error) {
+      console.log("error: ", error);
+    }
+    
+  }
   return (
     <div className="flex flex-col w-full justify-center items-center">
+            <label
+        htmlFor="username"
+        className="block text-sm font-medium text-gray-700"
+      >
+        Username
+      </label>
+      <div className="mt-1">
+        <input
+          type="text"
+          name="username"
+          id="username"
+          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          placeholder="Rachamv"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
+
       <label
         htmlFor="email"
         className="block text-sm font-medium text-gray-700"
